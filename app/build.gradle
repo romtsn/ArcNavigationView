@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion project.sdk
-    buildToolsVersion project.buildTools
+    compileSdkVersion rootProject.ext.sdk
+    buildToolsVersion rootProject.ext.buildTools
 
     defaultConfig {
         minSdkVersion project.minSdk
@@ -14,7 +14,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:' + project.supportVersion
-    compile 'com.android.support:design:' + project.supportVersion
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
     compile project(':arcnavigationview')
 }

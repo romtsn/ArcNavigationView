@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion project.sdk
-    buildToolsVersion project.buildTools
+    compileSdkVersion rootProject.ext.sdk
+    buildToolsVersion rootProject.ext.buildTools
 
     defaultConfig {
-        minSdkVersion project.minSdk
-        targetSdkVersion project.sdk
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.sdk
         versionCode 1
         versionName "1.0"
 
@@ -21,22 +21,10 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:' + project.supportVersion
-    compile 'com.android.support:design:' + project.supportVersion
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
 }
 
-task deleteJar(type: Delete) {
-    delete 'libs/arcnavigationview-' + project.libraryVersion + '.jar'
-}
-
-task createJar(type: Copy) {
-    from('build/intermediates/bundles/release')
-    into('libs/')
-    include('classes.jar')
-    rename('classes.jar', 'arcnavigationview-' + project.libraryVersion + '.jar')
-}
-
-createJar.dependsOn(deleteJar, build)
 
 ext {
     bintrayRepo = 'maven'
