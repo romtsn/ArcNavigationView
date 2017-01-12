@@ -25,6 +25,18 @@ dependencies {
     compile 'com.android.support:design:' + project.supportVersion
 }
 
+task deleteJar(type: Delete) {
+    delete 'libs/arcnavigationview-' + project.libraryVersion + '.jar'
+}
+
+task createJar(type: Copy) {
+    from('build/intermediates/bundles/release')
+    into('libs/')
+    include('classes.jar')
+    rename('classes.jar', 'arcnavigationview-' + project.libraryVersion + '.jar')
+}
+
+createJar.dependsOn(deleteJar, build)
 
 ext {
     bintrayRepo = 'maven'
