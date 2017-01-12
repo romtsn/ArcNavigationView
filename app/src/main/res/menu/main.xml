@@ -2,8 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:id="@+id/action_right_menu"
+        android:title="right menu"
+        android:icon="@drawable/ic_menu_white_24dp"
         android:orderInCategory="100"
-        app:showAsAction="never"/>
+        app:showAsAction="always"/>
 </menu>

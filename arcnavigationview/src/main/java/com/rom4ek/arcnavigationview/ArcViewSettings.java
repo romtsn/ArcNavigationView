@@ -3,6 +3,8 @@ package com.rom4ek.arcnavigationview;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -13,7 +15,7 @@ public class ArcViewSettings {
     private boolean cropInside = true;
     private float arcWidth;
     private float elevation;
-    private Drawable backgroundDrawable;
+    private Drawable backgroundDrawable = new ColorDrawable(Color.WHITE); //default background color of navigation view
 
     public static float dpToPx(Context context, int dp) {
         Resources r = context.getResources();
@@ -29,6 +31,7 @@ public class ArcViewSettings {
 
         int[] attrsArray = new int[]{
                 android.R.attr.background,
+                android.R.attr.layout_gravity,
         };
 
         TypedArray androidAttrs = context.obtainStyledAttributes(attrs, attrsArray);

@@ -11,11 +11,11 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
@@ -69,31 +69,59 @@ public class ArcNavigationView extends NavigationView {
         arcPath = new Path();
 
         float arcWidth = settings.getArcWidth();
-
+        DrawerLayout.LayoutParams layoutParams = (DrawerLayout.LayoutParams) getLayoutParams();
         if (settings.isCropInside()) {
-            arcPath.moveTo(width, 0);
-            arcPath.quadTo(width - arcWidth, height / 2,
-                    width, height);
-            arcPath.close();
+            if (layoutParams.gravity == Gravity.START || layoutParams.gravity == Gravity.LEFT) {
+                arcPath.moveTo(width, 0);
+                arcPath.quadTo(width - arcWidth, height / 2,
+                        width, height);
+                arcPath.close();
 
-            path.moveTo(0, 0);
-            path.lineTo(width, 0);
-            path.quadTo(width - arcWidth, height / 2,
-                    width, height);
-            path.lineTo(0, height);
-            path.close();
+                path.moveTo(0, 0);
+                path.lineTo(width, 0);
+                path.quadTo(width - arcWidth, height / 2,
+                        width, height);
+                path.lineTo(0, height);
+                path.close();
+            } else if (layoutParams.gravity == Gravity.END || layoutParams.gravity == Gravity.RIGHT) {
+                arcPath.moveTo(0, 0);
+                arcPath.quadTo(arcWidth, height / 2,
+                        0, height);
+                arcPath.close();
+
+                path.moveTo(width, 0);
+                path.lineTo(0, 0);
+                path.quadTo(arcWidth, height / 2,
+                        0, height);
+                path.lineTo(width, height);
+                path.close();
+            }
         } else {
-            arcPath.moveTo(width - arcWidth, 0);
-            arcPath.quadTo(width + arcWidth, height / 2,
-                    width - arcWidth, height);
-            arcPath.close();
+            if (layoutParams.gravity == Gravity.START || layoutParams.gravity == Gravity.LEFT) {
+                arcPath.moveTo(width - arcWidth, 0);
+                arcPath.quadTo(width + arcWidth, height / 2,
+                        width - arcWidth, height);
+                arcPath.close();
 
-            path.moveTo(0, 0);
-            path.lineTo(width - arcWidth, 0);
-            path.quadTo(width + arcWidth, height / 2,
-                    width - arcWidth, height);
-            path.lineTo(0, height);
-            path.close();
+                path.moveTo(0, 0);
+                path.lineTo(width - arcWidth, 0);
+                path.quadTo(width + arcWidth, height / 2,
+                        width - arcWidth, height);
+                path.lineTo(0, height);
+                path.close();
+            } else if (layoutParams.gravity == Gravity.END || layoutParams.gravity == Gravity.RIGHT) {
+                arcPath.moveTo(arcWidth, 0);
+                arcPath.quadTo(-arcWidth, height / 2,
+                        arcWidth, height);
+                arcPath.close();
+
+                path.moveTo(width, 0);
+                path.lineTo(arcWidth, 0);
+                path.quadTo(-arcWidth, height / 2,
+                        arcWidth, height);
+                path.lineTo(width, height);
+                path.close();
+            }
         }
         return path;
     }
@@ -152,8 +180,8 @@ public class ArcNavigationView extends NavigationView {
                     }
                     ViewCompat.setElevation(v, settings.getElevation());
 
-                    // adjusting child views to new width in their points related to path
-                    adjustChildViews((ViewGroup) v);
+                    //TODO: adjusting child views to new width in their rightmost/leftmost points related to path
+//                    adjustChildViews((ViewGroup) v);
                 }
             }
         }
@@ -162,6 +190,7 @@ public class ArcNavigationView extends NavigationView {
     private void adjustChildViews(ViewGroup container) {
         final int containerChildCount = container.getChildCount();
         PathMeasure pathMeasure = new PathMeasure(arcPath, false);
+        DrawerLayout.LayoutParams layoutParams = (DrawerLayout.LayoutParams) getLayoutParams();
 
         for (int i = 0; i < containerChildCount; i++) {
             View child = container.getChildAt(i);
@@ -173,10 +202,21 @@ public class ArcNavigationView extends NavigationView {
                 int halfHeight = location.height() / 2;
 
                 pathMeasure.getPosTan(location.top + halfHeight, pathCenterPointForItem, null);
-                if (child.getMeasuredWidth() > pathCenterPointForItem[0]) {
-                    child.measure(MeasureSpec.makeMeasureSpec((Math.round(pathCenterPointForItem[0]) - THRESHOLD),
-                            MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
-                            child.getMeasuredHeight(), MeasureSpec.EXACTLY));
+                if (layoutParams.gravity == Gravity.END || layoutParams.gravity == Gravity.RIGHT) {
+                    int centerPathPoint = getMeasuredWidth() - Math.round(pathCenterPointForItem[0]);
+                    if (child.getMeasuredWidth() > centerPathPoint) {
+                        child.measure(MeasureSpec.makeMeasureSpec(centerPathPoint - THRESHOLD,
+                                MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
+                                child.getMeasuredHeight(), MeasureSpec.EXACTLY));
+                        child.layout(centerPathPoint + THRESHOLD, child.getTop(), child.getRight(), child.getBottom());
+                    }
+                } else if (layoutParams.gravity == Gravity.START || layoutParams.gravity == Gravity.LEFT) {
+                    if (child.getMeasuredWidth() > pathCenterPointForItem[0]) {
+                        child.measure(MeasureSpec.makeMeasureSpec((Math.round(pathCenterPointForItem[0]) - THRESHOLD),
+                                MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
+                                child.getMeasuredHeight(), MeasureSpec.EXACTLY));
+                        child.layout(child.getLeft(), child.getTop(), (Math.round(pathCenterPointForItem[0]) - THRESHOLD), child.getBottom());
+                    }
                 }
                 //set text ellipsize to end to prevent it from overlapping edge
                 if (child instanceof TextView) {

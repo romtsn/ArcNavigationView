@@ -18,6 +18,7 @@ import com.arcnavigationview.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,36 +35,15 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-            @Override
-            public boolean onOptionsItemSelected(MenuItem item) {
-                if (item != null && item.getItemId() == android.R.id.home) {
-                    if (drawer.isDrawerOpen(GravityCompat.END)) {
-                        drawer.closeDrawer(GravityCompat.END);
-                    } else {
-                        drawer.openDrawer(GravityCompat.END);
-                    }
-                }
-                return false;
-            }
-        };
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationViewRight = (NavigationView) findViewById(R.id.nav_view_right);
+        navigationViewRight.setNavigationItemSelectedListener(this);
         navigationView.setNavigationItemSelectedListener(this);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.END)) {
-                    drawer.closeDrawer(GravityCompat.END);
-                } else {
-                    drawer.openDrawer(GravityCompat.END);
-                }
-            }
-        });
     }
 
     @Override
@@ -71,6 +51,8 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (drawer.isDrawerOpen(GravityCompat.END)) {
+            drawer.closeDrawer(GravityCompat.END);
         } else {
             super.onBackPressed();
         }
@@ -91,7 +73,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_right_menu) {
+            if (drawer.isDrawerOpen(GravityCompat.END)) {
+                drawer.closeDrawer(GravityCompat.END);
+            } else {
+                drawer.openDrawer(GravityCompat.END);
+            }
             return true;
         }
 
