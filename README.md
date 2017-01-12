@@ -29,7 +29,7 @@ NavigationView from android support library with curved edge
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         app:arc_cropDirection="cropOutside|cropInside"
-        app:arc_width="72dp"/>
+        app:arc_width="96dp"/>
 </android.support.v4.widget.DrawerLayout>
 ```
 
@@ -61,7 +61,7 @@ NavigationView from android support library with curved edge
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         app:arc_cropDirection="cropOutside"
-        app:arc_width="72dp"/>
+        app:arc_width="96dp"/>
 </android.support.v4.widget.DrawerLayout>
 ```
 
@@ -94,7 +94,7 @@ NavigationView from android support library with curved edge
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         app:arc_cropDirection="cropInside"
-        app:arc_width="72dp"/>
+        app:arc_width="96dp"/>
 </android.support.v4.widget.DrawerLayout>
 ```
 
