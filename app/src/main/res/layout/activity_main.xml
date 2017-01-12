@@ -21,8 +21,8 @@
         android:layout_gravity="start"
         android:background="@android:color/white"
         android:fitsSystemWindows="true"
-        app:arc_cropDirection="cropOutside"
-        app:arc_width="72dp"
+        app:arc_cropDirection="cropInside"
+        app:arc_width="96dp"
         app:itemBackground="@android:color/white"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>

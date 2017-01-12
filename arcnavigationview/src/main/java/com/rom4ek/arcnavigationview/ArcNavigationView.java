@@ -98,27 +98,27 @@ public class ArcNavigationView extends NavigationView {
             }
         } else {
             if (layoutParams.gravity == Gravity.START || layoutParams.gravity == Gravity.LEFT) {
-                arcPath.moveTo(width - arcWidth, 0);
-                arcPath.quadTo(width + arcWidth, height / 2,
-                        width - arcWidth, height);
+                arcPath.moveTo(width - arcWidth / 2, 0);
+                arcPath.quadTo(width + arcWidth / 2, height / 2,
+                        width - arcWidth / 2, height);
                 arcPath.close();
 
                 path.moveTo(0, 0);
-                path.lineTo(width - arcWidth, 0);
-                path.quadTo(width + arcWidth, height / 2,
-                        width - arcWidth, height);
+                path.lineTo(width - arcWidth / 2, 0);
+                path.quadTo(width + arcWidth / 2, height / 2,
+                        width - arcWidth / 2, height);
                 path.lineTo(0, height);
                 path.close();
             } else if (layoutParams.gravity == Gravity.END || layoutParams.gravity == Gravity.RIGHT) {
-                arcPath.moveTo(arcWidth, 0);
-                arcPath.quadTo(-arcWidth, height / 2,
-                        arcWidth, height);
+                arcPath.moveTo(arcWidth / 2, 0);
+                arcPath.quadTo(-arcWidth / 2, height / 2,
+                        arcWidth / 2, height);
                 arcPath.close();
 
                 path.moveTo(width, 0);
-                path.lineTo(arcWidth, 0);
-                path.quadTo(-arcWidth, height / 2,
-                        arcWidth, height);
+                path.lineTo(arcWidth / 2, 0);
+                path.quadTo(-arcWidth / 2, height / 2,
+                        arcWidth / 2, height);
                 path.lineTo(width, height);
                 path.close();
             }
