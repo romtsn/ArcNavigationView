@@ -29,7 +29,6 @@ dependencies {
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'ArcNavigationView'
-    orgName = 'rom4ekinc'
 
     publishedGroupId = 'com.rom4ek'
     libraryName = 'ArcNavigationView'
