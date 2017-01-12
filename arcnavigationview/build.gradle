@@ -24,3 +24,34 @@ dependencies {
     compile 'com.android.support:appcompat-v7:' + project.supportVersion
     compile 'com.android.support:design:' + project.supportVersion
 }
+
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'ArcNavigationView'
+    orgName = 'rom4ekinc'
+
+    publishedGroupId = 'com.rom4ek'
+    libraryName = 'ArcNavigationView'
+    artifact = 'arcnavigationview'
+
+    libraryDescription = 'NavigationView from android design support library with curved edge'
+
+    siteUrl = 'https://github.com/rom4ek/ArcNavigationView'
+    gitUrl = 'https://github.com/rom4ek/ArcNavigationView.git'
+
+    libraryVersion = rootProject.ext.libraryVersion
+
+    developerId = 'rom4ek'
+    developerName = 'Roman Zavarnitsyn'
+    developerEmail = 'rom4ek93@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: rootProject.file('gradle/install-v1.gradle')
+    apply from: rootProject.file('gradle/bintray-android-v1.gradle')
+}
