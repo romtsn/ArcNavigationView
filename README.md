@@ -1,5 +1,5 @@
 # ArcNavigationView
-NavigationView from android support library with curved edge
+NavigationView from android design support library with curved edge
 
 <img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_inside.png" width="303"> 	<img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_outside.png" width="303">
 
