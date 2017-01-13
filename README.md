@@ -103,22 +103,13 @@ NavigationView from android design support library with curved edge
 # Download
 [ ![Download](https://api.bintray.com/packages/rom4ek/maven/ArcNavigationView/images/download.svg) ](https://bintray.com/rom4ek/maven/ArcNavigationView/_latestVersion)
 
-1. Firstly, in your root build.gradle file:
-  
-  ```groovy
-  allprojects {
-      repositories {
-          maven { 'https://dl.bintray.com/rom4ek/maven' }
-      }
-  }
-  ```
-  
-2. Then in your module:
-  ```groovy
-  dependencies {
-      compile 'com.rom4ek:arcnavigationview:1.0.1'
-  }
-  ```
+In your module's build.gradle file:
+
+```groovy
+dependencies {
+    compile 'com.rom4ek:arcnavigationview:1.0.1'
+}
+```
 
 # Additionally
 
@@ -131,7 +122,6 @@ You can look how to implement this more closely in the [sample app](https://gith
 
 ## TODO
 
-* Add to jcenter (in progress)
 * Implement child views re-layout to prevent them from cutting, while using end|right gravity mode with left-to-right direction.
 
 Acknowledgements
