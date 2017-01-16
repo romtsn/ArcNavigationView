@@ -1,5 +1,6 @@
 package com.rom4ek.arcnavigationview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -64,6 +65,7 @@ public class ArcNavigationView extends NavigationView {
         THRESHOLD = Math.round(ArcViewSettings.dpToPx(getContext(), 15)); //some threshold for child views while remeasuring them
     }
 
+    @SuppressLint("RtlHardcoded")
     private Path createClipPath() {
         final Path path = new Path();
         arcPath = new Path();
@@ -154,20 +156,21 @@ public class ArcNavigationView extends NavigationView {
         width = getMeasuredWidth();
         if (width > 0 && height > 0) {
             clipPath = createClipPath();
-            ViewCompat.setElevation(this, settings.getElevation());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                setOutlineProvider(new ViewOutlineProvider() {
-                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void getOutline(View view, Outline outline) {
-                        if (clipPath.isConvex()) {
-                            outline.setConvexPath(clipPath);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                ViewCompat.setElevation(this, settings.getElevation());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    setOutlineProvider(new ViewOutlineProvider() {
+                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                        @Override
+                        public void getOutline(View view, Outline outline) {
+                            if (clipPath.isConvex()) {
+                                outline.setConvexPath(clipPath);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
 
-//            if (settings.isCropInside()) {
             final int count = getChildCount();
             for (int i = 0; i < count; i++) {
                 final View v = getChildAt(i);
@@ -178,8 +181,9 @@ public class ArcNavigationView extends NavigationView {
                     } else {
                         v.setBackgroundDrawable(settings.getBackgroundDrawable());
                     }
-                    ViewCompat.setElevation(v, settings.getElevation());
-
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                        ViewCompat.setElevation(v, settings.getElevation());
+                    }
                     //TODO: adjusting child views to new width in their rightmost/leftmost points related to path
 //                    adjustChildViews((ViewGroup) v);
                 }
@@ -187,6 +191,8 @@ public class ArcNavigationView extends NavigationView {
         }
     }
 
+    @SuppressWarnings("unused")
+    @SuppressLint("RtlHardcoded")
     private void adjustChildViews(ViewGroup container) {
         final int containerChildCount = container.getChildCount();
         PathMeasure pathMeasure = new PathMeasure(arcPath, false);

@@ -1,5 +1,5 @@
 # ArcNavigationView
-NavigationView from android support library with curved edge
+NavigationView from android design support library with curved edge
 
 <img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_inside.png" width="303"> 	<img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_outside.png" width="303">
 
@@ -100,6 +100,16 @@ NavigationView from android support library with curved edge
 
 <img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_inside.png" width="303">
 
+# Download
+[ ![Download](https://api.bintray.com/packages/rom4ek/maven/ArcNavigationView/images/download.svg) ](https://bintray.com/rom4ek/maven/ArcNavigationView/_latestVersion)
+
+In your module's build.gradle file:
+
+```groovy
+dependencies {
+    compile 'com.rom4ek:arcnavigationview:1.0.2'
+}
+```
 
 # Additionally
 
