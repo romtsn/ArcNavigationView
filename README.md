@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Arc%20NavigationView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5090)
+
 # ArcNavigationView
 NavigationView from android design support library with curved edge
 
