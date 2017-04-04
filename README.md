@@ -38,7 +38,7 @@ NavigationView from android design support library with curved edge
 
 # Sample
 
-##Crop Outside
+## Crop Outside
 
 ```xml
 <android.support.v4.widget.DrawerLayout
@@ -71,7 +71,7 @@ NavigationView from android design support library with curved edge
 <img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_outside.png" width="303">
 
 
-##Crop Inside
+## Crop Inside
 
 ```xml
 <android.support.v4.widget.DrawerLayout
@@ -100,8 +100,19 @@ NavigationView from android design support library with curved edge
         app:arc_width="96dp"/>
 </android.support.v4.widget.DrawerLayout>
 ```
-
 <img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_inside.png" width="303">
+
+
+## Translucent status or navigation bar
+
+Simply add next lines to your ```styles-v21``` folder
+
+```xml
+<style name="AppTheme" parent="AppTheme.Base">
+    <item name="android:windowTranslucentNavigation">true</item>
+    <item name="android:windowTranslucentStatus">true</item>
+</style>
+```
 
 # Download
 [ ![Download](https://api.bintray.com/packages/rom4ek/maven/ArcNavigationView/images/download.svg) ](https://bintray.com/rom4ek/maven/ArcNavigationView/_latestVersion)
