@@ -8,9 +8,11 @@ import android.graphics.Outline;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.internal.NavigationMenuView;
+import android.support.design.internal.ScrimInsetsFrameLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.TextView;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by rom4ek on 10.01.2017.
@@ -62,7 +66,21 @@ public class ArcNavigationView extends NavigationView {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
         setBackgroundColor(Color.TRANSPARENT);
+        setInsetsColor(Color.TRANSPARENT);
         THRESHOLD = Math.round(ArcViewSettings.dpToPx(getContext(), 15)); //some threshold for child views while remeasuring them
+    }
+
+    private void setInsetsColor(int color) {
+        try {
+            Field insetForegroundField = ScrimInsetsFrameLayout.class.getDeclaredField("mInsetForeground");
+            insetForegroundField.setAccessible(true);
+            ColorDrawable colorDrawable = new ColorDrawable(color);
+            insetForegroundField.set(this, colorDrawable);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("RtlHardcoded")
@@ -251,7 +269,7 @@ public class ArcNavigationView extends NavigationView {
     protected void dispatchDraw(Canvas canvas) {
         canvas.save();
 
-        canvas.clipPath(clipPath);
+        canvas.clipPath(clipPath);;
         super.dispatchDraw(canvas);
 
         canvas.restore();
