@@ -121,7 +121,7 @@ In your module's build.gradle file:
 
 ```groovy
 dependencies {
-    compile 'com.rom4ek:arcnavigationview:1.0.2'
+    compile 'com.rom4ek:arcnavigationview:1.0.3'
 }
 ```
 
