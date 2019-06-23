@@ -32,6 +32,7 @@ NavigationView from android design support library with curved edge
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         app:arc_cropDirection="cropOutside|cropInside"
+        app:fontAssetSrc="fonts/TT0998M_.ttf"
         app:arc_width="96dp"/>
 </android.support.v4.widget.DrawerLayout>
 ```
