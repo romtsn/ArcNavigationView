@@ -120,9 +120,18 @@ Simply add next lines to your ```styles-v21``` folder
 
 In your module's build.gradle file:
 
-```groovy
+```gradle
+
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+
+
 dependencies {
-    compile 'com.rom4ek:arcnavigationview:1.0.3'
+    implementation 'com.github.TalebRafiepour:ArcNavigationView:1.0.4'
 }
 ```
 
