@@ -131,7 +131,7 @@ allprojects {
 
 
 dependencies {
-    implementation 'com.github.TalebRafiepour:ArcNavigationView:1.0.4'
+    implementation 'com.github.TalebRafiepour:ArcNavigationView:1.0.5'
 }
 ```
 
