@@ -6,5 +6,6 @@
             <enum name="cropInside" value="0"/>
             <enum name="cropOutside" value="1"/>
         </attr>
+        <attr name="fontAssetSrc" format="string|reference"/>
     </declare-styleable>
 </resources>
