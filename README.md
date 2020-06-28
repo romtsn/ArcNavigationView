@@ -2,6 +2,11 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Arc%20NavigationView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5090)
 
+# WARNING
+
+The repository is no longer maintained
+---
+
 NavigationView from android design support library with curved edge
 
 <img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_inside.png" width="303"> 	<img src="https://raw.githubusercontent.com/rom4ek/ArcNavigationView/master/media/crop_outside.png" width="303">
@@ -121,7 +126,7 @@ In your module's build.gradle file:
 
 ```groovy
 dependencies {
-    implementation 'com.rom4ek:arcnavigationview:1.0.3'
+    implementation 'com.rom4ek:arcnavigationview:2.0.0'
 }
 ```
 
